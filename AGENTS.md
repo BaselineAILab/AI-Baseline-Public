@@ -1,5 +1,19 @@
 # Agent instructions
 
+## Task workspace lifecycle
+
+Create native Git worktrees only under `<primary-checkout-parent>/worktrees/<repo>-<task>`.
+Resolve that parent from the primary checkout, not the current task worktree; do not create
+nested `worktrees/worktrees/`, loose sibling task folders, or persistent task checkouts in
+`/tmp`. Reuse the same worktree and its own environment until the task is finished.
+
+Cleanup is a required completion step after the task's PRs merge and its processes and
+task-owned services stop. Preserve necessary evidence, check tracked, untracked, and ignored
+files, then remove the exact task worktree with `git worktree remove` from outside it.
+Remove task-owned scratch artifacts too. Never remove a primary checkout, another task's
+workspace, or the shared `worktrees/` directory. If ownership, activity, or retained files
+block safe removal, report the exact blocker and retained path instead of silently leaving it.
+
 ## Repository scope
 
 This repository publishes public AI Baseline examples and packaged integration
