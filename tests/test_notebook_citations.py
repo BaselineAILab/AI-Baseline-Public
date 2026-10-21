@@ -124,11 +124,12 @@ class NotebookCitationTests(unittest.TestCase):
 
     def test_request_uses_current_include_contract(self):
         self.functions.update(prepare_ai_baseline_query=lambda value: value,
-            AI_BASELINE_API_BASE_URL='https://example.invalid/v2', AI_BASELINE_DOMAIN='sandp_500',
+            AI_BASELINE_API_BASE_URL='https://example.invalid/baseline/sandp500',
             AI_BASELINE_MODE='research', AI_BASELINE_EFFORT='medium',
             AI_BASELINE_TIMEOUT_SECONDS=30, ai_baseline_headers=lambda: {},
-            post_json=lambda url, headers, payload, timeout: payload)
-        payload = self.functions['call_ai_baseline']('Question')
+            post_json=lambda url, headers, payload, timeout: (url, payload))
+        url, payload = self.functions['call_ai_baseline']('Question')
+        self.assertEqual(url, 'https://example.invalid/baseline/sandp500/query')
         self.assertEqual(payload['include'], {'evidence': True, 'evidence_instructions': True,
                                              'agent_context': True, 'summary': True})
 

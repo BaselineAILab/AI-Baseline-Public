@@ -1,6 +1,6 @@
 # AI Baseline Public
 
-This repository hosts public AI Baseline artifacts, examples, and reference workflows. It is intended as a lightweight distribution point for materials that help users evaluate or integrate with AI Baseline products, including packaged assistant integrations, notebooks, and generated sample outputs.
+This repository hosts public AI Baseline artifacts, examples, and reference workflows. It is intended as a lightweight distribution point for materials that help users evaluate or integrate with AI Baseline products, including notebooks and reference outputs.
 
 The contents of this repository may change over time as additional examples and public artifacts are released.
 
@@ -9,38 +9,26 @@ The contents of this repository may change over time as additional examples and 
 | Path | Description |
 | --- | --- |
 | `Claude/ai-baseline.mcpb` | Archived MCPB 0.1.3 Desktop extension retained for compatibility reproduction. |
-| `Claude/ai-baseline-skill.zip` | Maintained remote MCP skill for evidence-backed answers with inline document citations. |
+| `Claude/ai-baseline-skill.zip` | Archived skill retained for historical reproduction. |
 | `Notebooks/financial_research_pipeline.ipynb` | Example text-to-research notebook that extracts investment themes from source text, queries AI Baseline, and produces a grounded investment note. |
 | `Notebooks/investment_note.pdf` | Historical example output; it does not demonstrate the current citation workflow. |
 | `Notebooks/.env.example` | Environment variable template for local API credentials used by the notebook. |
 
-## Claude remote MCP skill
+## Claude remote MCP connection
 
-The maintained `Claude/ai-baseline-skill.zip` uses the configured remote MCP
-connection's `get_corpus_overview` and `retrieve_evidence_context` tools. Set up the
-connection URL provided for your company/base, enable it for the conversation and
-install the skill using your client's instructions. Configure authentication in the
-connection setup; never paste an API key into chat.
+Open [Connect AI Baseline S&P 500](https://mcp.ai-baseline.dev/baseline/sandp500/connect)
+and follow the remote connection instructions for your client. Authentication uses
+the browser sign-in flow. The canonical MCP URL is
+`https://mcp.ai-baseline.dev/baseline/sandp500`.
 
-The model generates answers from retrieved evidence and provider instructions.
-For each claim it follows the contributing citation IDs, resolves source metadata
-through the registry, and copies supplied URLs verbatim into ordinary inline
-Markdown citations. Multiple contributing sources or passages retain separate links.
-Missing links must be stated honestly; source summaries are not verified quotations.
-
-On a citation-enabled deployment, links open the complete retained document at the
-verified sentence, passage or chunk without a separate browser sign-in. Anyone
-holding a link can read its bound document until the stored expiry: 30 minutes by
-default, operator configurable. Clicks do not renew access; expired links require
-fresh authorized retrieval. Expiry does not retract previously delivered text.
-No Sources panel, MCP App, extra rendering call or dashboard is required.
-
-The MCPB 0.1.3 extension is an unchanged historical artifact. Its original
-instructions do not qualify the maintained remote citation experience. The skill
-is built from the corresponding source in the InfoWeaver repository; do not edit
-ZIP contents directly. Public deployment availability requires separate acceptance.
+The packaged files under `Claude/` are historical artifacts. The supported setup
+uses the remote connection; it does not require installing a local MCP server or
+releasing a separate Claude skill.
 
 ## Notebook Example
+
+The notebook targets `https://api.ai-baseline.dev/baseline/sandp500` and uses your
+existing AI Baseline API key.
 
 The `Notebooks` directory contains a self-contained research workflow that:
 
