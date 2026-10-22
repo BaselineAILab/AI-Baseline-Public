@@ -27,7 +27,7 @@ releasing a separate Claude skill.
 
 ## Notebook Example
 
-The notebook targets `https://api.ai-baseline.dev/baseline/sandp500` and uses your
+The notebook targets `https://api.ai-baseline.dev/baseline/sandp500/v2` and uses your
 existing AI Baseline API key.
 
 The `Notebooks` directory contains a self-contained research workflow that:
